@@ -1,17 +1,21 @@
-package net.highlightedsign.keypadnative
+package net.highlightedsign.keypadnative.activities
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import net.highlightedsign.keypadnative.ui.theme.KeyPadNativeTheme
+import net.highlightedsign.keypadnative.ui.views.MainView
+
+fun testToast (context: Context, text: String){
+    Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +24,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             KeyPadNativeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    MainView(
+                        modifier = Modifier.fillMaxSize().padding(innerPadding),
+                        onPermissionClick = { testToast(this, "Permission Clicked")  },
+                        onConnectClick = { testToast(this, "Connect Clicked") }
                     )
                 }
             }
@@ -30,18 +35,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    KeyPadNativeTheme {
-        Greeting("Android")
-    }
-}
