@@ -1,35 +1,30 @@
 package net.highlightedsign.keypadnative.presentation.activities
 
-import android.Manifest
-import android.content.Context
-import android.os.Build
+import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.core.content.ContextCompat
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import net.highlightedsign.keypadnative.presentation.activities.ui.theme.KeyPadNativeTheme
+import net.highlightedsign.keypadnative.ui.views.PermissionsView
 
 class PermissionsActivity : ComponentActivity() {
-    // ToDo: move to repository?
-    val requiredPermissions: Array<String> by lazy {
-        when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> {
-                arrayOf(
-                    Manifest.permission.BLUETOOTH_CONNECT,
-                    Manifest.permission.BLUETOOTH_SCAN,
-                    Manifest.permission.POST_NOTIFICATIONS
-                )
-            }
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-                arrayOf(
-                    Manifest.permission.BLUETOOTH_CONNECT,
-                    Manifest.permission.BLUETOOTH_SCAN
-                )
-            }
-            else -> {
-                arrayOf(
-                    Manifest.permission.BLUETOOTH,
-                    Manifest.permission.BLUETOOTH_ADMIN,
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent{
+            net.highlightedsign.keypadnative.ui.theme.KeyPadNativeTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    PermissionsView(
+                        modifier = Modifier.fillMaxSize().padding(innerPadding)
+                    )
+                }
             }
         }
     }

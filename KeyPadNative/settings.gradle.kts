@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "KeyPadNative"
 include(":app")
- 
+include(":keypadkit")

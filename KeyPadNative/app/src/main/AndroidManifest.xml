@@ -14,18 +14,18 @@
         android:maxSdkVersion="30" />
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
-        android:maxSdkVersion="30"/>
+        android:maxSdkVersion="30" />
     <uses-permission
         android:name="android.permission.ACCESS_COARSE_LOCATION"
-        android:maxSdkVersion="30"/>
-
+        android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_SCAN"
         android:usesPermissionFlags="neverForLocation"
         tools:targetApi="s" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -38,9 +38,13 @@
         android:theme="@style/Theme.KeyPadNative"
         tools:targetApi="31" >
         <activity
+            android:name=".presentation.activities.PermissionsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_permissions"
+            android:theme="@style/Theme.KeyPadNative" />
+        <activity
             android:name=".presentation.activities.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.KeyPadNative" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

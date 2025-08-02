@@ -1,6 +1,7 @@
 package net.highlightedsign.keypadnative.presentation.activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -26,12 +27,18 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     MainView(
                         modifier = Modifier.fillMaxSize().padding(innerPadding),
-                        onPermissionClick = { testToast(this, "Permission Clicked")  },
+                        onPermissionClick = this::onPermissionClick,
                         onConnectClick = { testToast(this, "Connect Clicked") }
                     )
                 }
             }
         }
+    }
+
+    fun onPermissionClick(){
+        testToast(this, "Permission Clicked")
+        val intent = Intent(this, PermissionsActivity::class.java)
+        startActivity(intent)
     }
 }
 
