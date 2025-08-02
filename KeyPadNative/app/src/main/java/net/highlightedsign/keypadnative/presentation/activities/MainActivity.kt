@@ -1,4 +1,4 @@
-package net.highlightedsign.keypadnative.activities
+package net.highlightedsign.keypadnative.presentation.activities
 
 import android.content.Context
 import android.os.Bundle
