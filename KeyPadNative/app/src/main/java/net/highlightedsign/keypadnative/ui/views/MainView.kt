@@ -32,9 +32,11 @@ val elementModifier = Modifier.padding(start = 8.dp)
 fun MainView(
         modifier: Modifier = Modifier,
         onPermissionClick: () -> Unit = {},
+        onBtDevClick: () -> Unit = {},
         onConnectClick: () -> Unit = {}) {
     Column(modifier = modifier) {
         PermissionCardView(onPermissionClick)
+        BtDevCardView(onBtDevClick)
         ConnectionCardView(onConnectClick)
     }
 }
@@ -50,6 +52,22 @@ fun PermissionCardView(onCLick: () -> Unit = {}){
             contentDescription = "Warning")
         Text(
             text = "Permission",
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = elementModifier)
+    }
+}
+
+@Composable
+fun BtDevCardView(onCLick: () -> Unit = {}){
+    Row(
+        modifier = rowModifier(onCLick),
+        verticalAlignment = Alignment.CenterVertically) {
+        Icon(
+            painter = painterResource(id = R.drawable.outline_adb_24),
+            tint = MaterialTheme.colorScheme.primary,
+            contentDescription = "Bt Dev")
+        Text(
+            text = "Bt Dev",
             style = MaterialTheme.typography.bodyLarge,
             modifier = elementModifier)
     }

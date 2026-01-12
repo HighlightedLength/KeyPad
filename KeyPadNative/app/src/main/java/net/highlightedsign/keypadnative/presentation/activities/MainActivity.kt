@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
                     MainView(
                         modifier = Modifier.fillMaxSize().padding(innerPadding),
                         onPermissionClick = this::onPermissionClick,
+                        onBtDevClick = this::onBtDevClick,
                         onConnectClick = { testToast(this, "Connect Clicked") }
                     )
                 }
@@ -38,6 +39,12 @@ class MainActivity : ComponentActivity() {
     fun onPermissionClick(){
         testToast(this, "Permission Clicked")
         val intent = Intent(this, PermissionsActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onBtDevClick(){
+        testToast(this, "Dev Clicked")
+        val intent = Intent(this, DevBtActivity::class.java)
         startActivity(intent)
     }
 }
