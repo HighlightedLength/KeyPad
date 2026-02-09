@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import net.highlightedsign.keypadkit.models.AdapterState
 import net.highlightedsign.keypadnative.R
 import net.highlightedsign.keypadnative.presentation.viewmodels.DevBtViewModel
 
@@ -25,10 +26,10 @@ fun DevBtView(
 ){
     val adapterState = viewModel.adapterState.collectAsStateWithLifecycle()
     val adapterStateText = when (adapterState.value) {
-        BluetoothAdapter.STATE_ON -> "On"
-        BluetoothAdapter.STATE_TURNING_ON -> "Turning On"
-        BluetoothAdapter.STATE_OFF -> "Off"
-        BluetoothAdapter.STATE_TURNING_OFF -> "Turning Off"
+        AdapterState.ON -> "On"
+        AdapterState.TURNING_ON -> "Turning On"
+        AdapterState.OFF -> "Off"
+        AdapterState.TURNING_OFF -> "Turning Off"
         else -> "Unknown"
     }
     Column(modifier = modifier){
@@ -38,9 +39,9 @@ fun DevBtView(
             Icon(
                 painter = painterResource(id = R.drawable.power_24),
                 tint = when (adapterState.value) {
-                    BluetoothAdapter.STATE_ON -> Color.Green
-                    BluetoothAdapter.STATE_TURNING_ON -> Color.Yellow
-                    BluetoothAdapter.STATE_OFF -> Color.Gray
+                    AdapterState.ON -> Color.Green
+                    AdapterState.TURNING_ON -> Color.Yellow
+                    AdapterState.OFF -> Color.Gray
                     else -> Color.Red // STATE_TURNING_OFF and other values
                 },
                 contentDescription = "Adapter OnOff State"

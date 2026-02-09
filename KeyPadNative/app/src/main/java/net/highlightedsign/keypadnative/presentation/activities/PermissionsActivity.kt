@@ -11,13 +11,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import net.highlightedsign.keypadkit.interfaces.IBtPermissionService
-import net.highlightedsign.keypadkit.services.BtPermissionsService
+import net.highlightedsign.keypadnative.KeyPadNativeApplication
 import net.highlightedsign.keypadnative.presentation.viewmodels.PermissionsViewModel
 import net.highlightedsign.keypadnative.ui.views.PermissionsView
 
 class PermissionsActivity: ComponentActivity() {
-    private val btPermissionService : IBtPermissionService = BtPermissionsService()
+    private val keyPadBtManager by lazy { (application as KeyPadNativeApplication).keyPadBtManager}
     private val permissionsLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -27,7 +26,7 @@ class PermissionsActivity: ComponentActivity() {
     private lateinit var viewModel: PermissionsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = PermissionsViewModel(btPermissionService.checkPermissions(this))
+        viewModel = PermissionsViewModel(keyPadBtManager.checkPermissions(this))
         enableEdgeToEdge()
         setContent{
             net.highlightedsign.keypadnative.ui.theme.KeyPadNativeTheme {
@@ -48,7 +47,7 @@ class PermissionsActivity: ComponentActivity() {
     }
 
     fun onGrantPermClick(){
-        val permissions = btPermissionService.checkPermissions(this)
+        val permissions = keyPadBtManager.checkPermissions(this)
         for(perm in permissions) {
             Log.d("PermissionsActivity", "Permission ${perm.key}: ${perm.value}")
         }
@@ -77,11 +76,11 @@ class PermissionsActivity: ComponentActivity() {
     }
 
     private fun requestPerms(){
-        permissionsLauncher.launch(btPermissionService.getRequiredPermissions())
+        permissionsLauncher.launch(keyPadBtManager.getRequiredPermissions())
     }
 
     private fun syncPermState(){
-        val updatedPermissions = btPermissionService.checkPermissions(this)
+        val updatedPermissions = keyPadBtManager.checkPermissions(this)
         updatedPermissions.forEach{ (permission, granted) -> viewModel.setPermission(permission, granted) }
     }
 }

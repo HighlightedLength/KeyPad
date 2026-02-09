@@ -1,9 +1,9 @@
 package net.highlightedsign.keypadnative
 
 import android.app.Application
-import net.highlightedsign.keypadnative.locallib.BtManager
+import net.highlightedsign.keypadkit.KeyPadBtManager
 
 class KeyPadNativeApplication : Application(){
 
-    val btManager by lazy { BtManager(applicationContext) }
+    val keyPadBtManager by lazy { KeyPadBtManager(applicationContext) }
 }

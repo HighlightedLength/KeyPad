@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
-import net.highlightedsign.keypadnative.locallib.BtManager
+import net.highlightedsign.keypadkit.KeyPadBtManager
 
-class DevBtViewModel(private val btManager: BtManager) : ViewModel() {
-    val adapterState = btManager.adapterState
+class DevBtViewModel(private val keyPadBtManager: KeyPadBtManager) : ViewModel() {
+    val adapterState = keyPadBtManager.adapterState
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5000),

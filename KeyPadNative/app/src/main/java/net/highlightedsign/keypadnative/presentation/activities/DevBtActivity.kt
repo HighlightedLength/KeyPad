@@ -5,17 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import net.highlightedsign.keypadnative.KeyPadNativeApplication
-import net.highlightedsign.keypadnative.R
 import net.highlightedsign.keypadnative.presentation.viewmodels.DevBtViewModel
 import net.highlightedsign.keypadnative.ui.theme.KeyPadNativeTheme
 import net.highlightedsign.keypadnative.ui.views.DevBtView
@@ -25,7 +21,7 @@ class DevBtActivity : ComponentActivity() {
     val viewModel: DevBtViewModel by viewModels{
         object : ViewModelProvider.Factory{
             override fun <T : ViewModel> create(modelClass: Class<T>): T{
-                val manager = (application as KeyPadNativeApplication).btManager
+                val manager = (application as KeyPadNativeApplication).keyPadBtManager
                 return DevBtViewModel(manager) as T
             }
         }
