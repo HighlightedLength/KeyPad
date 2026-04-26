@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import keyboardReducer from './keyboard';
 import keyboardLayoutReducer from './keyboardLayouts';
+import permissionReducer from './permission';
 
 export const store = configureStore({
   reducer: {
     keyboard: keyboardReducer,
     keyboardLayout: keyboardLayoutReducer,
+    permission: permissionReducer,
   },
 });
 

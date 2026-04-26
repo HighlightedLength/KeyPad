@@ -1,17 +1,26 @@
 import { useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { Button, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 
 import Keyboard from "@/components/Keyboard";
+import { selectPermissionResult } from '@/data/permission';
 import { RootState } from "@/data/store";
 import { KeyboardStateSelectors } from "@/data/keyboard";
-
 import * as Ble from '@/modules/expo-ble';
+import { requestBluetoothPermissions } from '@/utils/permission';
 
 export default function Index() {
   const router = useRouter();
   const keyboardStyle = useSelector((state: RootState) => state.keyboard.style);
   const layout = useSelector(KeyboardStateSelectors.selectKeyboardLayout);
+  const permissionResult = useSelector(selectPermissionResult);
+
+  useEffect(() => {
+    requestBluetoothPermissions();
+  }, []);
+
+
   return (
     <View
       style={{
@@ -39,7 +48,7 @@ export default function Index() {
           }}
         />
       </View>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text>Edit app/index.tsx to edit this screen 2.</Text>
       <Keyboard layout={layout} keyboardStyle={keyboardStyle} />
     </View>
   );
